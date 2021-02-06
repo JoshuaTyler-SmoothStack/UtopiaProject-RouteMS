@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>ss-utopia</name>
-	<comment></comment>
+	<name>smoothstack-utopia</name>
+	<comment>Utopia Airlines Smoothstack project. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -55,12 +55,11 @@
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 		<nature>org.jboss.tools.jst.web.kb.kbnature</nature>
 		<nature>org.jboss.tools.cdi.core.cdinature</nature>
-		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 		<nature>org.hibernate.eclipse.console.hibernateNature</nature>
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1612326110023</id>
+			<id>1612638791781</id>
 			<name></name>
 			<type>30</type>
 			<matcher>
