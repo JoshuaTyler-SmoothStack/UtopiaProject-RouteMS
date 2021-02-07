@@ -18,11 +18,11 @@ public interface RouteRepository extends JpaRepository<Route, Integer> {
 	Route findRouteById(Integer id);
 
 	@Query(value = "SELECT * FROM route WHERE destination_id = ?1", nativeQuery = true)
-	List<Route> findRoutesByDestination(Integer id);
+	List<Route> findRoutesByDestination(String destination);
 
 	@Query(value = "SELECT * FROM route WHERE origin_id = ?1", nativeQuery = true)
-	List<Route> findRoutesByOrigin(Integer id);
+	List<Route> findRoutesByOrigin(String origin);
 
 	@Query(value = "SELECT * FROM route WHERE destination_id = ?1 AND origin_id = ?2", nativeQuery = true)
-	List<Route> findRoutesByDestinationAndOrigin(Integer destinationId, Integer originId);
+	Route findRouteByDestinationAndOrigin(String destination, String origin);
 }
