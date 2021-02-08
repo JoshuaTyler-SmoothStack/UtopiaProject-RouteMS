@@ -51,8 +51,7 @@ public class RouteService {
 		
 		try {
 			return routeRepository.save(route);
-		}
-		catch(Exception err) {
+		}	catch(Exception err) {
 			throw new RouteAlreadyExistsException("This route already exists");
 		}
 	}
@@ -61,7 +60,16 @@ public class RouteService {
 		if(findRouteById(id) == null) 
 			throw new RouteDoesNotExistException("This route does not exist.");
 		routeRepository.deleteById(id);
-		
+	}
+
+	public Route update(Route route) throws RouteDoesNotExistException, AirportDoesNotExistException {
+		try {
+			return insert(route);
+		} catch (RouteAlreadyExistsException err) {
+			throw new RouteDoesNotExistException("This route does not exist.");
+		} catch (AirportDoesNotExistException err) {
+			throw new AirportDoesNotExistException("Airport(s) does not exist");
+		}
 	}
 
 }
