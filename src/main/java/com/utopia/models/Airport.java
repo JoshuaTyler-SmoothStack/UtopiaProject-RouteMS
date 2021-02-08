@@ -22,6 +22,11 @@ public class Airport {
 		this.aiportCode = aiportCode;
 		this.city = city;
 	}
+	
+	public Airport(String aiportCode) {
+		super();
+		this.aiportCode = aiportCode;
+	}
 
 	public String getAiportCode() {
 		return aiportCode;
