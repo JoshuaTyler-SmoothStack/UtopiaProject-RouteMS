@@ -62,11 +62,11 @@ public class RouteService {
 		routeRepository.deleteById(id);
 	}
 
-	public Route update(Route route) throws RouteDoesNotExistException, AirportDoesNotExistException {
+	public Route update(Route route) throws RouteAlreadyExistsException, AirportDoesNotExistException {
 		try {
 			return insert(route);
 		} catch (RouteAlreadyExistsException err) {
-			throw new RouteDoesNotExistException("This route does not exist.");
+			throw new RouteAlreadyExistsException("This route already exists.");
 		} catch (AirportDoesNotExistException err) {
 			throw new AirportDoesNotExistException("Airport(s) does not exist");
 		}
