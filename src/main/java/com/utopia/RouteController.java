@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -94,12 +96,17 @@ public class RouteController {
 	public ResponseEntity<Route> update(@RequestBody Route route) {
 		try {
 			Route newRoute = routeService.update(route);
-			return new ResponseEntity<>(newRoute, HttpStatus.OK);
+			return new ResponseEntity<>(newRoute, HttpStatus.NO_CONTENT);
 		}	catch (AirportDoesNotExistException err) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-		} 	catch (RouteDoesNotExistException err) {
-			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		} 	catch (RouteAlreadyExistsException err) {
+			return new ResponseEntity<>(null, HttpStatus.CONFLICT);
 		}
+	}
+	
+	@ExceptionHandler(HttpMediaTypeNotSupportedException.class)
+	public ResponseEntity<Object> invalidRequestContent() {
+		return new ResponseEntity<>("Invalid Message Content!", HttpStatus.BAD_REQUEST);
 	}
 	
 }
