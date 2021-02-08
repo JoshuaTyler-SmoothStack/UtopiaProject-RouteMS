@@ -14,8 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -80,8 +80,8 @@ public class RouteController {
 		} 
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Route> delete(@PathVariable Integer id) {
+	@DeleteMapping("/del")
+	public ResponseEntity<Route> delete(@RequestParam Integer id) {
 		try {
 			routeService.deleteById(id);
 			return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
@@ -90,6 +90,16 @@ public class RouteController {
 		}
 	}
 	
-	
+	@PutMapping("/update")
+	public ResponseEntity<Route> update(@RequestBody Route route) {
+		try {
+			Route newRoute = routeService.update(route);
+			return new ResponseEntity<>(newRoute, HttpStatus.OK);
+		}	catch (AirportDoesNotExistException err) {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		} 	catch (RouteDoesNotExistException err) {
+			return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+		}
+	}
 	
 }
