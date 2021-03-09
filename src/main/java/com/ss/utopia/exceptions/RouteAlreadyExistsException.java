@@ -1,4 +1,4 @@
-package com.utopia.exeptions;
+package com.ss.utopia.exceptions;
 
 public class RouteAlreadyExistsException extends Exception{
 	
