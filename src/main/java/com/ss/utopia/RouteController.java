@@ -14,7 +14,6 @@ import com.ss.utopia.services.RouteService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/routes", produces = { "application/json", "application/xml", "text/xml"}, consumes = MediaType.ALL_VALUE)
+@RequestMapping(value = "/routes")
 public class RouteController {
 	
 	@Autowired
@@ -56,7 +55,7 @@ public class RouteController {
 	@PostMapping("/search")
 	public ResponseEntity<Object> findBySearchAndFilter(@RequestBody HashMap<String, String> filterMap) {
 		List<Route> routeList = routeService.findBySearchAndFilter(filterMap);
-		return !filterMap.isEmpty()
+		return !routeList.isEmpty()
 			? new ResponseEntity<>(routeList, HttpStatus.OK)
 			: new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
 
@@ -85,7 +84,7 @@ public class RouteController {
 			String routeOriginIataId = routeMap.get("routeOriginIataId");
 			String routeDestinationIataId = routeMap.get("routeDestinationIataId");
 			Route newRoute = routeService.update(routeId, routeOriginIataId, routeDestinationIataId);
-			return new ResponseEntity<>(newRoute, HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(newRoute, HttpStatus.OK);
 		
 		}	catch (AirportNotFoundException err) {
 			return new ResponseEntity<>(new HttpError(err.getMessage(), 400), HttpStatus.BAD_REQUEST);

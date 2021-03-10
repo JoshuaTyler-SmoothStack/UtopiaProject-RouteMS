@@ -77,14 +77,13 @@ public class RouteService {
 				.collect(Collectors.toList());
 			} catch(Exception err){/*Do nothing*/}
 		}
-
+		
 		// Search - (applied last due to save CPU usage
 		return applySearch(routes, filterMap);
 	}
 
 	public List<Route> applySearch(List<Route> routes, HashMap<String, String> filterMap) {
 		List<Route> routesWithSearchTerms = new ArrayList<Route>();
-		
 		String searchTerms = "searchTerms";
 		if(filterMap.keySet().contains(searchTerms)) {
 			String formattedSearch = filterMap.get(searchTerms)
@@ -118,6 +117,9 @@ public class RouteService {
 				}
 			}
 		}
+		else {
+			return routes;
+		}
 		return routesWithSearchTerms;
 	}
 
@@ -149,6 +151,7 @@ public class RouteService {
 		List<Route> existingRouteList = findBySearchAndFilter(filterMap);
 		if(!existingRouteList.isEmpty()) throw new RouteAlreadyExistsException("A Route already exist for origin: " + originIataId + " to destination: " + destinationIataId + ".");
 
+		route.setRouteId(routeId);
 		route.setRouteOriginIataId(originIataId);
 		route.setRouteDestinationIataId(destinationIataId);
 		return routeRepository.save(route);
