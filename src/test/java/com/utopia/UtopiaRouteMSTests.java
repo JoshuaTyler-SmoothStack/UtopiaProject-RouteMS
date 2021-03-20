@@ -1,14 +1,14 @@
-package com.utopia;
+// package com.utopia;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class UtopiaRouteMSTests {
+// @SpringBootTest
+// class UtopiaRouteMSTests {
 
-	@Test
-	void contextLoads() {
+// 	@Test
+// 	void contextLoads() {
 		
-	}
+// 	}
 
-}
+// }
